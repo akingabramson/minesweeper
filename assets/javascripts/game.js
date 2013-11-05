@@ -26,7 +26,6 @@
 			game.board.makeMove(row, col);
 			if (game.board.gameOver) {
 				game.end();
-				// unbind click
 			}
 		});
 	}
@@ -35,12 +34,13 @@
 		var game = this;
 
 		this.$smiley.on("click", function () {
-			if (game.board.checkForWin()) {
+			if (game.board.checkForWin() && !game.board.gameOver) {
 				// change the gif
 				game.board.cheer();
 			} else {
 				game.$smiley.attr("src", "assets/images/dead.gif")
 			}
+			game.board.gameOver = true;
 		});
 	}
 
